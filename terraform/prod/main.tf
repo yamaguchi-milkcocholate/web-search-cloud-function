@@ -62,6 +62,14 @@ resource "google_cloudfunctions2_function" "default" {
   }
 }
 
+# デフォルトサービスアカウントにCloud Runのビルドロールを付与
+resource "google_project_iam_member" "run_builder_role" {
+  project = module.common.project_id
+  role    = "roles/run.builder"
+  member  = "serviceAccount:${module.common.project_number}-compute@developer.gserviceaccount.com"
+}
+
+# Cloud RunのIAMポリシーを設定
 resource "google_cloud_run_service_iam_member" "member" {
   project  = google_cloudfunctions2_function.default.project
   location = google_cloudfunctions2_function.default.location
