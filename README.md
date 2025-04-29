@@ -23,6 +23,10 @@ gcloud config set project `PROJECT_ID`
 
 ```shell
 gcloud projects add-iam-policy-binding `PROJECT_ID` \
+      --member=serviceAccount:`PROJECT_NUMBER`-compute@developer.gserviceaccount.com \
+      --role=roles/run.builder
+
+gcloud projects add-iam-policy-binding my-playground-458212 \
       --member=serviceAccount:1062902222689-compute@developer.gserviceaccount.com \
       --role=roles/run.builder
 ```
